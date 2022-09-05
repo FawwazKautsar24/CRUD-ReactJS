@@ -20,24 +20,49 @@ class InputFormComponent extends React.Component{
             [event.target.name]: [event.target.value],
         });
     }
-
+    
     handleSubmit = (event) => {
         // mencegah terjadinya reload setelah klik submit
         event.preventDefault();
         
         // this.props.addNote(this.state);
-        // console.log('Data-1: ', this.state);
-        this.setState({
-            foods: [
-                ...this.state.foods,
-                {
-                    id: this.state.foods.length+1,
-                    foodName: this.state.foodName,
-                    foodDescription: this.state.foodDescription,
-                    foodPrice: this.state.foodPrice,
-                }
-            ]
-        });
+        // console.log('Data-1 (input): ', this.state);
+        
+        const selainMakananYangDiEdit = this.state.foods
+            .filter((food) => food.id !== this.state.id)
+            .map((filteredFood) => {
+                return filteredFood;
+            });
+        // console.log('Selain yang di-edit: ', selainMakananYangDiEdit);
+            
+        if(this.state.id){
+            // jika sudah terdapat Data / ID
+            this.setState({
+                foods: [
+                    ...selainMakananYangDiEdit,
+                    {
+                        // Data yang di-edit akan tetap memiliki ID yang sama
+                        id: this.state.id,
+                        foodName: this.state.foodName,
+                        foodDescription: this.state.foodDescription,
+                        foodPrice: this.state.foodPrice,
+                    }
+                ]
+            });
+        }else{
+            // jika belum terdapat Data / ID, maka akan membuat Data baru
+            this.setState({
+                foods: [
+                    ...selainMakananYangDiEdit,
+                    {
+                        id: this.state.foods.length+1,
+                        foodName: this.state.foodName,
+                        foodDescription: this.state.foodDescription,
+                        foodPrice: this.state.foodPrice,
+                    }
+                ]
+            });
+        }
 
         // form isian kembali di reset, setalah enter / klik submit
         this.setState({
@@ -48,14 +73,30 @@ class InputFormComponent extends React.Component{
         });
     }
 
+    editData = (id) => {
+        const showEditedFood = this.state.foods
+            .filter((food) => food.id === id)
+            .map((filteredFood) => {
+                return filteredFood
+            });
+
+        this.setState({
+            id: showEditedFood[0].id,
+            foodName: showEditedFood[0].foodName,
+            foodDescription: showEditedFood[0].foodDescription,
+            foodPrice: showEditedFood[0].foodPrice,
+        });
+        // console.log(showEditedFood);
+    }
+    
     render(){
-        // console.log('Data-2: ', this.state.foods);
+        // console.log('Data-2 (state): ', this.state.foods);
         return (
             <div>
-                <TableComponent foods={this.state.foods} />
+                <TableComponent foods={this.state.foods} editData={this.editData} />
                 <Row>
                     <Col>
-                        <h4>Tambah Data</h4>
+                        <h4>{this.state.id ? 'Ubah Data' : 'Tambah Data'}</h4>
                     </Col>
                 </Row>
                 <Row>

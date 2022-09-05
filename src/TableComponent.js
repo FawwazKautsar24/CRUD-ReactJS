@@ -21,12 +21,14 @@ class TableComponent extends React.Component{
                 <tbody>
                     {this.props.foods.map((food, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td>{i+1}</td>
                                 <td>{food.foodName}</td>
                                 <td>{food.foodDescription}</td>
                                 <td>Rp. {food.foodPrice}</td>
-                                <td>-</td>
+                                <td>
+                                    <button className="btn btn-warning" onClick={() => {this.props.editData(food.id)}}>Edit</button>
+                                </td>
                             </tr>
                         )
                     })}
