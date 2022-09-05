@@ -104,6 +104,15 @@ class InputFormComponent extends React.Component{
             ]
         });
     }
+
+    clearData = () => {
+        this.setState({
+            id: '',
+            foodName: '',
+            foodDescription: '',
+            foodPrice: '',
+        });
+    }
     
     render(){
         // console.log('Data-2 (state): ', this.state.foods);
@@ -130,10 +139,13 @@ class InputFormComponent extends React.Component{
                                 <Form.Label>Harga Makanan</Form.Label>
                                 <Form.Control type="number" name="foodPrice" value={this.state.foodPrice} onChange={(event) => this.handleChange(event)} />
                             </Form.Group>
-                            <Button className="mt-4 float-right" variant="secondary" type="submit">
+                            <Button className="mt-4 float-right" variant="dark" type="submit">
                                 Submit
                             </Button>
                         </Form>
+                        <Button className="mt-4 mr-2 float-right" variant="secondary" type="clear" onClick={() => {this.clearData()}}>
+                            Clear
+                        </Button>
                     </Col>
                 </Row>
             </div>
