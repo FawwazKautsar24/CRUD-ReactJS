@@ -27,7 +27,8 @@ class TableComponent extends React.Component{
                                 <td>{food.foodDescription}</td>
                                 <td>Rp. {food.foodPrice}</td>
                                 <td>
-                                    <button className="btn btn-warning" onClick={() => {this.props.editData(food.id)}}>Edit</button>
+                                    <button className="btn btn-warning mr-2" onClick={() => {this.props.editData(food.id)}}>Edit</button>
+                                    <button className="btn btn-danger" onClick={() => {this.props.deleteData(food.id)}}>Delete</button>
                                 </td>
                             </tr>
                         )
