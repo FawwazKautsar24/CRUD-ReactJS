@@ -3,6 +3,10 @@ import { Table } from 'react-bootstrap';
 
 class TableComponent extends React.Component{
     render(){
+
+        // console.log('Data-3: ', this.props);
+        // console.log('Data-3b: ', this.props.foodName);
+        // console.log('Data-4: ', this.props.foods);
         return (
             <Table striped bordered hover>
                 <thead>
@@ -15,13 +19,17 @@ class TableComponent extends React.Component{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>-</td>
-                    </tr>
+                    {this.props.foods.map((food, i) => {
+                        return (
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{food.foodName}</td>
+                                <td>{food.foodDescription}</td>
+                                <td>Rp. {food.foodPrice}</td>
+                                <td>-</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
                 </Table>
         );

@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import NavbarComponent from './NavbarComponent';
-import Crud from './Crud';
-import TableComponent from './TableComponent';
 import InputFormComponent from './InputFormComponent';
+import TableComponent from './TableComponent';
 
 // import style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,8 +12,8 @@ root.render(
     <React.StrictMode>
         <NavbarComponent />
         <div className='container mt-4'>
-            <TableComponent />
             <InputFormComponent />
+            {/* <TableComponent /> */}
         </div>
     </React.StrictMode>
 );
