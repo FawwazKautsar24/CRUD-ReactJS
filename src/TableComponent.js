@@ -11,7 +11,7 @@ class TableComponent extends React.Component{
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No.</th>
                         <th>Nama Makanan</th>
                         <th>Deskripsi</th>
                         <th>Harga</th>

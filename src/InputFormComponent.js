@@ -130,7 +130,7 @@ class InputFormComponent extends React.Component{
                                 <Form.Label>Harga Makanan</Form.Label>
                                 <Form.Control type="number" name="foodPrice" value={this.state.foodPrice} onChange={(event) => this.handleChange(event)} />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
+                            <Button className="mt-4 float-right" variant="secondary" type="submit">
                                 Submit
                             </Button>
                         </Form>
