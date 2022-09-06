@@ -12,6 +12,7 @@ class InputFormComponent extends React.Component{
             foodName: '',
             foodDescription: '',
             foodPrice: '',
+            startCountId: 1
         }
     }
 
@@ -27,12 +28,12 @@ class InputFormComponent extends React.Component{
         
         // this.props.addNote(this.state);
         // console.log('Data-1 (input): ', this.state);
-        
         const selainMakananYangDiEdit = this.state.foods
             .filter((food) => food.id !== this.state.id)
             .map((filteredFood) => {
                 return filteredFood;
             });
+        
         // console.log('Selain yang di-edit: ', selainMakananYangDiEdit);
             
         if(this.state.id){
@@ -55,7 +56,8 @@ class InputFormComponent extends React.Component{
                 foods: [
                     ...selainMakananYangDiEdit,
                     {
-                        id: this.state.foods.length+1,
+                        // id: this.state.foods.length+1,
+                        id: this.state.startCountId++,
                         foodName: this.state.foodName,
                         foodDescription: this.state.foodDescription,
                         foodPrice: this.state.foodPrice,
@@ -88,12 +90,35 @@ class InputFormComponent extends React.Component{
         });
         // console.log(showEditedFood);
     }
+
+    deleteData = (id) => {
+        const selainMakananYangDiDelete = this.state.foods
+            .filter((food) => food.id !== id)
+            .map((filteredFood) => {
+                return filteredFood;
+            });
+        
+        this.setState({
+            foods: [
+                ...selainMakananYangDiDelete,
+            ]
+        });
+    }
+
+    clearData = () => {
+        this.setState({
+            id: '',
+            foodName: '',
+            foodDescription: '',
+            foodPrice: '',
+        });
+    }
     
     render(){
         // console.log('Data-2 (state): ', this.state.foods);
         return (
             <div>
-                <TableComponent foods={this.state.foods} editData={this.editData} />
+                <TableComponent foods={this.state.foods} editData={this.editData} deleteData={this.deleteData} />
                 <Row>
                     <Col>
                         <h4>{this.state.id ? 'Ubah Data' : 'Tambah Data'}</h4>
@@ -114,10 +139,13 @@ class InputFormComponent extends React.Component{
                                 <Form.Label>Harga Makanan</Form.Label>
                                 <Form.Control type="number" name="foodPrice" value={this.state.foodPrice} onChange={(event) => this.handleChange(event)} />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
+                            <Button className="mt-4 float-right" variant="dark" type="submit">
                                 Submit
                             </Button>
                         </Form>
+                        <Button className="mt-4 mr-2 float-right" variant="secondary" type="clear" onClick={() => {this.clearData()}}>
+                            Clear
+                        </Button>
                     </Col>
                 </Row>
             </div>
